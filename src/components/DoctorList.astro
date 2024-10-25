@@ -1,0 +1,38 @@
+---
+// Компонент для отображения списка докторов и навигации
+const {page } = Astro.props;
+import { getDoctors } from '../api/modules/doctors';
+
+let doctors = [];
+let count = 0;
+let errorMessage = '';
+
+try {
+    const response = await getDoctors({ page, url:'vrachi' });
+
+    console.log('Response from getDoctors:', response); // Логирование ответа
+
+    if (response.ok) {
+        doctors = response.doctors;
+        count = response.count;
+    } else {
+        errorMessage = response.message || 'Неизвестная ошибка';
+    }
+} catch (error) {
+    errorMessage = 'Ошибка при обращении к серверу';
+}
+---
+<ul>
+    {doctors.map(doctor => (
+            <li key={doctor.id}>
+                <a href={`/doctors/${doctor.id}`}>{doctor.fullname}</a>
+            </li>
+    ))}
+</ul>
+<nav>
+    {Array.from({ length: count }, (_, i) => (
+            <a href={`/doctors/page/${i + 1}`} class={page === i + 1 ? 'active' : ''}>
+                {i + 1}
+            </a>
+    ))}
+</nav>

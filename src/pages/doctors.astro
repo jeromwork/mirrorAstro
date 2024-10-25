@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import DoctorList from '../components/DoctorList.astro'
+// Получаем номер страницы из параметров запроса
+const page =  1;
+---
+
+<Layout title="Список докторов">
+    <h1>Список докторов</h1>
+    <DoctorList page={page} />
+</Layout>

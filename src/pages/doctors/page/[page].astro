@@ -1,0 +1,31 @@
+---
+// Логика загрузки данных для любой страницы пагинации
+import DoctorList from '../../../components/DoctorList.astro';
+import Layout from "../../../layouts/Layout.astro";
+
+import { getDoctors } from '../../../api/modules/doctors';
+
+
+export async function getStaticPaths() {
+    // Замените это на реальный запрос для получения общего количества страниц
+
+    const response = await getDoctors({url:'vrachi'});
+    const count = (response.count) ?? 0;
+
+
+    const perPage = 10; // Укажите количество докторов на страницу
+    const totalPages = Math.ceil(count / perPage);
+
+    return Array.from({ length: totalPages }, (_, i) => ({
+        params: { page: (i + 1).toString() },
+    }));
+}
+
+const page = Number(Astro.params.page) || 1;
+
+
+
+---
+<Layout title="Список докторов">
+    <DoctorList page={page} />
+</Layout>

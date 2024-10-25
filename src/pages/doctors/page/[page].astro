@@ -7,8 +7,6 @@ import { getDoctors } from '../../../api/modules/doctors';
 
 
 export async function getStaticPaths() {
-    // Замените это на реальный запрос для получения общего количества страниц
-
     const response = await getDoctors({url:'vrachi'});
     const count = (response.count) ?? 0;
 

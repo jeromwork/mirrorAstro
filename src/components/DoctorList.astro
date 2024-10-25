@@ -6,7 +6,8 @@ import { getDoctors } from '../api/modules/doctors';
 let doctors = [];
 let count = 0;
 let errorMessage = '';
-
+const perPage = 10;
+let totalPages = 1;
 try {
     const response = await getDoctors({ page, url:'vrachi' });
 
@@ -15,6 +16,7 @@ try {
     if (response.ok) {
         doctors = response.doctors;
         count = response.count;
+        totalPages = Math.ceil(count / perPage);
     } else {
         errorMessage = response.message || 'Неизвестная ошибка';
     }
@@ -30,7 +32,7 @@ try {
     ))}
 </ul>
 <nav>
-    {Array.from({ length: count }, (_, i) => (
+    {Array.from({ length: totalPages }, (_, i) => (
             <a href={`/doctors/page/${i + 1}`} class={page === i + 1 ? 'active' : ''}>
                 {i + 1}
             </a>

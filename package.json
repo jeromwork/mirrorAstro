@@ -1,0 +1,20 @@
+{
+  "name": "astrotest1",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.4",
+    "@astrojs/vue": "^5.0.10",
+    "@tiptap/starter-kit": "^2.11.7",
+    "@tiptap/vue-3": "^2.11.7",
+    "astro": "^5.7.3",
+    "decap-cms": "^3.6.2",
+    "vue": "^3.5.13"
+  }
+}
